@@ -1,24 +1,39 @@
-import React from 'react';
-
-const products = [
-  {
-    id: 1,
-    name: 'Producto 1',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    id: 2,
-    name: 'Producto 2',
-    image: 'https://via.placeholder.com/150',
-  },
-  {
-    id: 3,
-    name: 'Producto 3',
-    image: 'https://via.placeholder.com/150',
-  },
-];
+// ItemListContainer.js
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useLocation } from 'react-router-dom';
+import { getProducts } from './api';
 
 const ItemListContainer = ({ greeting }) => {
+  const { id: categoryId } = useParams();
+  const { pathname } = useLocation();
+  const [products, setProducts] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      let data;
+
+      if (categoryId) {
+        data = await getProducts(categoryId);
+      } else {
+        data = await getProducts();
+      }
+
+      setProducts(data);
+    } catch (error) {
+      console.error('Error al cargar productos:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    console.log('Categoría ID:', categoryId);
+    console.log('Ruta actual:', pathname);
+  }, [categoryId, pathname]);
+
+  useEffect(() => {
+    console.log('Ruta actual actualizada:', pathname);
+  }, [pathname]);
+
   return (
     <div className="container mt-5">
       <h2>{greeting}</h2>
@@ -29,7 +44,10 @@ const ItemListContainer = ({ greeting }) => {
               <img src={product.image} className="card-img-top" alt={product.name} />
               <div className="card-body">
                 <h5 className="card-title">{product.name}</h5>
-                <button className="btn btn-primary">Agregar al carrito</button>
+                <p className="card-text">Precio: ${product.price}</p>
+                <Link to={`/item/${product.id}`} className="btn btn-primary">
+                  Ver Detalles
+                </Link>
               </div>
             </div>
           </div>

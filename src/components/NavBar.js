@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CartWidget from './CartWidget';
 
 const Navbar = () => {
@@ -8,37 +9,30 @@ const Navbar = () => {
         <span role="img" aria-label="shopping-cart">🛍️</span> Lo De Pedro
       </a>
       <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav ml-auto">
+        <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="/">
-              Inicio
-            </a>
+            <Link className="nav-link" to="/">
+              Catálogo
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/productos">
-              Productos
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/categoria/electronica">
+            <Link className="nav-link" to="/category/electronica">
               Electrónica
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/categoria/ropa">
+            <Link className="nav-link" to="/category/ropa">
               Ropa
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/categoria/hogar-jardin">
+            <Link className="nav-link" to="/category/hogar-jardin">
               Hogar y Jardín
-            </a>
-          </li>
-          <li className="nav-item">
-            <CartWidget itemCount={3} />
+            </Link>
           </li>
         </ul>
       </div>
+      <CartWidget itemCount={3} />
     </nav>
   );
 };
