@@ -4,10 +4,12 @@ import Navbar from './components/NavBar';
 import CartWidget from './components/CartWidget';
 import ItemListContainer from './components/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer';
+import CartProvider from './components/CartProvider';
 
 const App = () => {
   return (
-    <Router>
+  <CartProvider>
+   <Router>
       <div>
         <Navbar>
           <Link to="/">Brand</Link>
@@ -29,7 +31,8 @@ const App = () => {
           </Route>
         </Switch>
       </div>
-    </Router>
+    </Router> 
+  </CartProvider>
   );
 };
 
