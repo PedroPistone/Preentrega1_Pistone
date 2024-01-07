@@ -5,6 +5,7 @@ import CartWidget from './components/CartWidget';
 import ItemListContainer from './components/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import CartProvider from './components/CartProvider';
+import Checkout from './components/Checkout';
 
 const App = () => {
   return (
@@ -35,5 +36,8 @@ const App = () => {
   </CartProvider>
   );
 };
+<Route path="/checkout">
+  <Checkout />
+</Route>
 
 export default App;
